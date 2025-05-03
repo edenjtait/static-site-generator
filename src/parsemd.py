@@ -4,7 +4,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
   result = []
 
   for old_node in old_nodes:
-    if old_node.TextType != TextType.TEXT:
+    if old_node.text_type is not TextType.TEXT:
       result.append(old_node)
       continue
 
@@ -21,3 +21,17 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
       if second_pos == -1:
         raise ValueError("closing delimiter '{delimiter}' not found")
 
+      delimiter_len = len(delimiter)
+
+      before_text = current_text[:first_pos]
+
+      middle_text = current_text[first_pos + delimiter_len:second_pos]
+
+      after_text = current_text[second_pos + delimiter_len:]
+
+      if before_text:
+        result.append(TextNode(before_text, TextType.TEXT))
+
+      result.append(TextNode(middle_text, text_type))
+
+      current_text = after_text

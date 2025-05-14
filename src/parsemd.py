@@ -10,7 +10,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
     current_text = old_node.text
 
-    while True:
+    while delimiter != None:
       first_pos = current_text.find(delimiter)
       if first_pos == -1:
         if current_text:
@@ -32,6 +32,6 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
       if before_text:
         result.append(TextNode(before_text, TextType.TEXT))
 
-      result.append(TextNode(middle_text, text_type))
+        result.append(TextNode(middle_text, text_type))
 
-      current_text = after_text
+        current_text = after_text

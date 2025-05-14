@@ -2,7 +2,7 @@ import unittest
 
 from parsemd import split_nodes_delimiter as snd
 
-from textnode import TextNode
+from textnode import TextNode, TextType
 
 class TestSplitNodesDelimiter(unittest.TestCase):
 
@@ -10,4 +10,6 @@ class TestSplitNodesDelimiter(unittest.TestCase):
         self.assertEqual(snd([TextNode("", "")], "", ""), None)
 
     def test_string(self):
-        self.assertEqual(snd([TextNode("This is a string", "")], "", ""), "This is a string")
+        node = TextNode("This is a string", TextType.TEXT)
+        new_node = snd([node], None, TextType.TEXT)
+        self.assertEqual(new_node, "something")
